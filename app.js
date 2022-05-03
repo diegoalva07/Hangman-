@@ -4,8 +4,9 @@
 const hManGame = function(){
    
    //Variables
-    const game = {}; // Variable for the game
+    const values = {currentWord:'', }; // Variable for the game values
     const hmanNodes = {}; // game elements container
+    const randomWords = ["mavericks", "pipeline","margaret","peniche"]
 
     function hMan(){
        
@@ -24,7 +25,8 @@ const hManGame = function(){
         hmanNodes.words.textContent = 'This is the hangman Game';
 
         //btn event to start the game
-        hmanNodes.startBtn.addEventListener('click', gameTime)
+        hmanNodes.startBtn.addEventListener('click', gameTime);
+        
 
     }
 
@@ -33,7 +35,27 @@ const hManGame = function(){
     // function to start the game
 
     function gameTime(){
+
+        //Display and functionalities 
+
         hmanNodes.startBtn.style.display = "none";
+        // this will mae the array of words random  each time
+        if(randomWords.length > 0){
+            randomWords.sort(()=>{
+                return .5 - Math.random()
+            })
+
+            // this return the first word of the random word array after being ramdomised. 
+            values.currentWord = randomWords.shift();
+            hmanNodes.score.style.display = "block";
+            hmanNodes.letters.style.display = "block";
+            hmanNodes.words.textContent = values.currentWord;
+            
+        }
+
+        // next steps
+        
+     
     }
 
 
