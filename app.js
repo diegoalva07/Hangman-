@@ -10,7 +10,7 @@ const hManGame = function(){
     function hMan(){
        
        
-       // Node createor
+       // Node creator
         hmanNodes.gameContainer = document.querySelector('.gameContainer');
         hmanNodes.score = nodeCreator('div',hmanNodes.gameContainer,'Score');
         hmanNodes.startBtn = nodeCreator('button',hmanNodes.gameContainer,'start game');
@@ -23,11 +23,23 @@ const hManGame = function(){
         hmanNodes.letters.style.display = 'none';
         hmanNodes.words.textContent = 'This is the hangman Game';
 
-        
-        console.log(domEle);
+        //btn event to start the game
+        hmanNodes.startBtn.addEventListener('click', gameTime)
 
-        
     }
+
+    // Functions
+
+    // function to start the game
+
+    function gameTime(){
+        hmanNodes.startBtn.style.display = "none";
+    }
+
+
+
+
+    //This function will create a new node and append it to the game Container. 
 
     function nodeCreator(val,parentEle,output){
         let temp = document.createElement(val);
