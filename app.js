@@ -4,7 +4,7 @@
 const hManGame = function(){
    
    //Variables
-    const values = {currentWord:'', }; // Variable for the game values
+    const values = {currentWord:'', solution:'' }; // Variable for the game values
     const hmanNodes = {}; // game elements container
     const randomWords = ["mavericks", "pipeline","margaret","peniche"]
 
@@ -47,15 +47,18 @@ const hManGame = function(){
 
             // this return the first word of the random word array after being ramdomised. 
             values.currentWord = randomWords.shift();
+            values.solution = values.currentWord.split(''); 
             hmanNodes.score.style.display = "block";
             hmanNodes.letters.style.display = "block";
             hmanNodes.words.textContent = values.currentWord;
-            
+            buildBoard();
         }
 
         // next steps
-        
-     
+    }
+
+    function buildBoard(){
+        console.log(values);
     }
 
 
