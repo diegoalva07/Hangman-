@@ -15,8 +15,8 @@ const hManGame = function(){
         hmanNodes.gameContainer = document.querySelector('.gameContainer');
         hmanNodes.score = nodeCreator('div',hmanNodes.gameContainer,'Score');
         hmanNodes.startBtn = nodeCreator('button',hmanNodes.gameContainer,'start game');
-        hmanNodes.letters = nodeCreator('div',hmanNodes.gameContainer,'letters');
         hmanNodes.words = nodeCreator('div',hmanNodes.gameContainer,'Secret Word');
+        hmanNodes.letters = nodeCreator('div',hmanNodes.gameContainer,'letters');
         
         
         //style and CCSS
@@ -45,9 +45,9 @@ const hManGame = function(){
                 return .5 - Math.random()
             })
 
-            // this return the first word of the random word array after being ramdomised. 
-            values.currentWord = randomWords.shift();
-            values.solution = values.currentWord.split(''); 
+            
+            values.currentWord = randomWords.shift();// this return the first word of the random word array after being ramdomised. 
+            values.solution = values.currentWord.split(''); // this will split the selected word into separate letter, to have index acces
             hmanNodes.score.style.display = "block";
             hmanNodes.letters.style.display = "block";
             hmanNodes.words.textContent = values.currentWord;
@@ -59,6 +59,15 @@ const hManGame = function(){
 
     function buildBoard(){
         console.log(values);
+        hmanNodes.letters.innerHTML = '';
+        for (let i=0; i<26; i++){ // using the loop, we are going to return from character 65(a) till character x (z)
+             let abc = String.fromCharCode(65 + i) // Charcode returns an specified string from  the utc-16. 
+             let lettersInput = nodeCreator('div',hmanNodes.letters,abc);
+             lettersInput.classList.add('box');
+             
+
+        }
+
     }
 
 
