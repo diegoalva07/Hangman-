@@ -4,9 +4,9 @@
 const hManGame = function(){
    
    //Variables
-    const values = {currentWord:'', solution:'' }; // Variable for the game values
+    const values = {currentWord:'', solution:'',correct:0, incorrect:0, total:0} // Variable for the game values
     const hmanNodes = {}; // game elements container
-    const randomWords = ["mavericks", "pipeline","margaret","peniche"]
+    const randomWords = ["mavericks", "reflexive","technique","lifehacks"]
 
     function hMan(){
        
@@ -14,23 +14,71 @@ const hManGame = function(){
        // Node creator
         hmanNodes.gameContainer = document.querySelector('.gameContainer');
         hmanNodes.score = nodeCreator('div',hmanNodes.gameContainer,'Score');
-        hmanNodes.startBtn = nodeCreator('button',hmanNodes.gameContainer,'start game');
         hmanNodes.words = nodeCreator('div',hmanNodes.gameContainer,'Secret Word');
+        hmanNodes.startBtn = nodeCreator('button',hmanNodes.gameContainer,'start game');
         hmanNodes.letters = nodeCreator('div',hmanNodes.gameContainer,'letters');
         
         
         //style and CCSS
         hmanNodes.score.style.display = 'none';
         hmanNodes.letters.style.display = 'none';
-        hmanNodes.words.textContent = 'This is the hangman Game';
+        hmanNodes.words.textContent = 'The hangman Game';
 
-        //btn event to start the game
+        //btn event to start the gam
         hmanNodes.startBtn.addEventListener('click', gameTime);
         
 
     }
 
     // Functions
+
+    function scoreOutput(){
+        let valuesOutput = `${values.total} letters found ${values.correct} missed ${values.incorrect}`;
+        hmanNodes.score.innerHTML = valuesOutput;
+
+        // winnin and losing condition
+
+        if (values.incorrect == 3 ){
+           
+            hmanNodes.score.style.display = 'none';
+            hmanNodes.letters.style.display = 'none';
+            hmanNodes.words.textContent = 'you got yourself hanged';
+            hmanNodes.startBtn = nodeCreator('button',hmanNodes.gameContainer,'TRY AGAIN');
+            hmanNodes.startBtn.addEventListener('click', gameTime);
+            values.total = 0
+            
+        }
+        else if (values.total === 0){
+            alert('you win the game')
+        }
+    }
+
+
+
+    // this function will sellet all the div with an specific class to loop over and create conditionals.
+    // if statement to check if the letter click matches the a letter in the selected word and if it dores, will populate that specifi letter in the gameboar output text content.
+    function lettersCheckr (let){
+        // console.log(let);
+        let letterSelector = document.querySelectorAll(".gameContentC");
+        let correctLetters = 0;
+        letterSelector.forEach((element) => {
+        // console.log(element.letter);
+             if (let === element.letter.toUpperCase()){
+                element.textContent = element.letter;
+                correctLetters++
+                
+            }
+
+        }) //  statement will upadte the value of incorrect and correct of the score output
+            if (correctLetters !== 0){
+            values.correct += correctLetters;
+            values.total--
+            }else{
+            values.incorrect++;
+         }
+         scoreOutput()
+
+    }
 
     // function to start the game
 
@@ -45,28 +93,40 @@ const hManGame = function(){
                 return .5 - Math.random()
             })
 
-            
+            values.correct = 0;
+            values.incorrect=0;
             values.currentWord = randomWords.shift();// this return the first word of the random word array after being ramdomised. 
             values.solution = values.currentWord.split(''); // this will split the selected word into separate letter, to have index acces
             hmanNodes.score.style.display = "block";
             hmanNodes.letters.style.display = "block";
             hmanNodes.words.textContent = values.currentWord;
-            buildBoard();
+            inputBoard();
+            scoreOutput()
         }
 
         // next steps
     }
 
-    function buildBoard(){
+    function inputBoard(){
         // console.log(values);
+        // once the game start we dont want to be showin gany information on letters or words.
         hmanNodes.letters.innerHTML = '';
         hmanNodes.words.innerHTML = '';
 
-        // hmanNodes.words.innerHTML = ''; // this will hide the selected letter 
+        // for each to create a div, per letter of the selected word, div style and do not display any letters.
          values.solution.forEach((lettrs) =>{
              let lettersIpunt = nodeCreator('div',hmanNodes.words," ");
              lettersIpunt.classList.add('gameContentC');
+             lettersIpunt.letter = lettrs; // hidden value of the object that will contain the letters.
             
+             // if statement to check if there is a space in the words (FOR API functionality of choosing random words from a source)
+            if (lettrs == " "){
+                lettersIpunt.textContent = ' ';
+            } // 
+            else {
+                values.total = values.total + 1;
+            }
+
          })
 
         for (let i=0; i<26; i++){ // using the loop, we are going to return from character 65(a) till character x (z)
@@ -74,8 +134,9 @@ const hManGame = function(){
              let lettersInput = nodeCreator('div',hmanNodes.letters,abc); // will create node for each letter
              lettersInput.classList.add('gameContent'); //  adding style
               let disabledBtn = function (e){
-                 console.log(e); 
-                 console.log(abc);
+                 lettersCheckr(abc);
+                 
+                //  console.log(abc);
                  lettersInput.classList.remove('gameContent');
                  lettersInput.classList.add('gameContentB');
 
