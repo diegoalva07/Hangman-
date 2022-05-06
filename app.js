@@ -58,12 +58,31 @@ const hManGame = function(){
     }
 
     function buildBoard(){
-        console.log(values);
+        // console.log(values);
         hmanNodes.letters.innerHTML = '';
+        hmanNodes.words.innerHTML = '';
+
+        // hmanNodes.words.innerHTML = ''; // this will hide the selected letter 
+         values.solution.forEach((lettrs) =>{
+             let lettersIpunt = nodeCreator('div',hmanNodes.words," ");
+             lettersIpunt.classList.add('gameContentC');
+            
+         })
+
         for (let i=0; i<26; i++){ // using the loop, we are going to return from character 65(a) till character x (z)
              let abc = String.fromCharCode(65 + i) // Charcode returns an specified string from  the utc-16. 
-             let lettersInput = nodeCreator('div',hmanNodes.letters,abc);
-             lettersInput.classList.add('box');
+             let lettersInput = nodeCreator('div',hmanNodes.letters,abc); // will create node for each letter
+             lettersInput.classList.add('gameContent'); //  adding style
+              let disabledBtn = function (e){
+                 console.log(e); 
+                 console.log(abc);
+                 lettersInput.classList.remove('gameContent');
+                 lettersInput.classList.add('gameContentB');
+
+                 lettersInput.removeEventListener("click", disabledBtn);
+
+              }  
+             lettersInput.addEventListener("click", disabledBtn)
              
 
         }
