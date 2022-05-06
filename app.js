@@ -6,7 +6,7 @@ const hManGame = function(){
    //Variables
     const values = {currentWord:'', solution:'',correct:0, incorrect:0, total:0} // Variable for the game values
     const hmanNodes = {}; // game elements container
-    const randomWords = ["mavericks", "reflexive","technique","lifehacks"]
+    const randomWords = ["mavericks","technique","lifehacks"]
 
     function hMan(){
        
@@ -49,7 +49,12 @@ const hManGame = function(){
             
         }
         else if (values.total === 0){
-            alert('you win the game')
+            hmanNodes.score.style.display = 'none';
+            hmanNodes.letters.style.display = 'none';
+            hmanNodes.words.textContent = 'Congratulations you won';
+            hmanNodes.startBtn = nodeCreator('button',hmanNodes.gameContainer,'Play Again');
+            hmanNodes.startBtn.addEventListener('click', gameTime);
+            values.total = 0
         }
     }
 
@@ -139,6 +144,7 @@ const hManGame = function(){
                 //  console.log(abc);
                  lettersInput.classList.remove('gameContent');
                  lettersInput.classList.add('gameContentB');
+                 
 
                  lettersInput.removeEventListener("click", disabledBtn);
 
