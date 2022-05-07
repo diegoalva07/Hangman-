@@ -10,7 +10,9 @@
 
 1. screenshot of the app
     
-    - ![Screenshot 1](/relative/path/to/img.jpg?raw=true)
+    ![Screenshot 1](https://github.com/diegoalva07/hangman/blob/main/Assets/Screenshots/App_1.png)
+    ![Screenshot 2](https://github.com/diegoalva07/hangman/blob/main/Assets/Screenshots/App_1.png?raw=true)
+    ![Screenshot 3](/main/Assets/Screenshots/App_1.png?raw=true)
 
 2. List of the Technologies used
 
@@ -23,3 +25,4 @@
 
 
 6. Descriptions of any Unsolved problems or major hurdles you had to overcome
+
