@@ -10,7 +10,7 @@
 
 1. screenshot of the app
     
-    - /main/Assets/Screenshots/App_1.png?raw=true
+    - ![Screenshot 1](/relative/path/to/img.jpg?raw=true)
 
 2. List of the Technologies used
 
