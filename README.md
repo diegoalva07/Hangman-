@@ -9,7 +9,8 @@
     
 
 1. screenshot of the app
-    https://github.com/diegoalva07/hangman/blob/main/Assets/Screenshots/App_1.png?raw=true
+    
+    - /main/Assets/Screenshots/App_1.png?raw=true
 
 2. List of the Technologies used
 
